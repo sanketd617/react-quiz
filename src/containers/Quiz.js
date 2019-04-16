@@ -80,7 +80,7 @@ class Quiz extends React.Component {
                     <Grid item lg={3}>
                     </Grid>
                 </Hidden>
-                <Grid item sm={12} lg={6} className={classes.main}>
+                <Grid item xs={12} lg={6} className={classes.main}>
                     <Card className={classes.card}>
                         <div className={classes.header}>
                             {

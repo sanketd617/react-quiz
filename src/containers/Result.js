@@ -53,7 +53,7 @@ class Result extends React.Component {
 
     render() {
         if(!this.checkIfAnswered(this.props.questions)){
-            // this.props.history.replace("/quiz")
+            this.props.history.replace("/quiz")
         }
 
         const {classes} = this.props;

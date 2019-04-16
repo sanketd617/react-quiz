@@ -7,11 +7,11 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import Icon from "@material-ui/core/Icon";
 import Link from "@material-ui/core/Link";
+import {withRouter} from "react-router-dom";
 
 
 const styles = theme => createStyles({
     root: {
-        border: "1px solid lightgrey",
         padding: theme.spacing.unit*5,
         height: 0.8*window.innerHeight,
         display: 'flex',
@@ -23,7 +23,11 @@ const styles = theme => createStyles({
     heading: {
         fontFamily: 'Baloo',
         textAlign: 'center',
-        color: theme.palette.primary.main
+        color: theme.palette.primary.main,
+
+        [theme.breakpoints.down('sm')]: {
+            fontSize: 56,
+        }
     },
     question: {
         fontFamily: 'Montserrat',
@@ -69,7 +73,7 @@ const Home = props => {
                 <Grid item lg={3}>
                 </Grid>
             </Hidden>
-            <Grid item sm={12} lg={6} className={classes.main}>
+            <Grid item xs={12} lg={6} className={classes.main}>
                 <Typography variant="h1" className={classes.heading}>
                     QuizW!z
                 </Typography>
@@ -79,15 +83,14 @@ const Home = props => {
                     </Typography>
                 </div>
                 <div className={classes.buttonContainer}>
-                    <Link href="/quiz">
-                        <Button
-                            variant="contained"
-                            color="primary"
-                            className={classes.button}
-                        >
-                            get started
-                        </Button>
-                    </Link>
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        className={classes.button}
+                        onClick={() => props.history.push("/quiz")}
+                    >
+                        get started
+                    </Button>
                 </div>
                 <div className={classes.devInfo}>
                     <div className={classes.devDiv}>
@@ -99,12 +102,15 @@ const Home = props => {
                         </a>
                     </div>
                     <div className={classes.devDiv}>
-                        <span className={classes.devName}>
-                            <Icon>email</Icon> &nbsp; dahegaonkarsanket@gmail.com
-                        </span>
+                        <div className={classes.devName}>
+                            <Icon>email</Icon> &nbsp; <a className={classes.link} href="mailto:dahegaonkarsanket@gmail.com">dahegaonkarsanket@gmail.com</a>
+                        </div>
                     </div>
                     <div className={classes.devName}>
-                        <Icon>call</Icon> &nbsp; <a href="tel:+918381027904" className={classes.link}>+91 8381027904</a> &nbsp; / &nbsp; <a href="tel:+917620971629" className={classes.link}>+91 7620971629</a>
+                        <Icon>call</Icon><a href="tel:+918381027904" className={classes.link}>+91 8381027904</a>
+                    </div>
+                    <div className={classes.devName}>
+                        <Icon>call</Icon><a href="tel:+917620971629" className={classes.link}>+91 7620971629</a>
                     </div>
                 </div>
             </Grid>
@@ -116,4 +122,4 @@ const Home = props => {
     );
 };
 
-export default withStyles(styles)(Home);
+export default withRouter(withStyles(styles)(Home));
