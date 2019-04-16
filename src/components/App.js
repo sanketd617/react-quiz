@@ -3,7 +3,7 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import createStyles from "@material-ui/core/styles/createStyles";
 import {BrowserRouter, Route} from "react-router-dom";
 import Home from "./Home";
-import Quiz from "./Quiz";
+import Quiz from "../containers/Quiz";
 
 
 const styles = theme => createStyles({
