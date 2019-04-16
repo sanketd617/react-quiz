@@ -7,6 +7,7 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 
+//classes for styling
 const styles = theme => createStyles({
     heading: {
         color: theme.palette.primary.main,
@@ -20,13 +21,17 @@ const Header = props => {
 
         <AppBar position="static" color="default" elevation={1}>
             <Grid container>
+                {/*hide on medium & smaller screens*/}
                 <Hidden mdDown>
                     <Grid item lg={3}>
                     </Grid>
                 </Hidden>
+
+
                 <Grid item xs={12} lg={6}>
                     <Toolbar>
                         <Typography variant="h4" color="inherit" className={classes.heading}>
+                            {/*Title*/}
                             QuizWiz
                         </Typography>
                     </Toolbar>

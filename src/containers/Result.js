@@ -12,6 +12,7 @@ import Button from "@material-ui/core/Button";
 import {withRouter} from "react-router-dom";
 import {reset} from "../actions/QuizActions";
 
+//classes for styling
 const styles = theme => createStyles({
     main: {
         paddingTop: theme.spacing.unit*4
@@ -43,6 +44,7 @@ const styles = theme => createStyles({
 
 class Result extends React.Component {
 
+    //check if all questions are answered
     checkIfAnswered(questions){
         for(let i=0; i<questions.length; i++){
             if(questions[i].response == null)
@@ -52,6 +54,8 @@ class Result extends React.Component {
     }
 
     render() {
+
+        //if all questions are not answered redirect to 1st question
         if(!this.checkIfAnswered(this.props.questions)){
             this.props.history.replace("/quiz")
         }
@@ -68,25 +72,31 @@ class Result extends React.Component {
                 </Hidden>
                 <Grid item xs={12} lg={6} className={classes.main}>
                     <div className={classes.circleContainer}>
+                        {/*//circular stats*/}
                         <CircularProgress
                             className={classes.progressBackground}
                             variant="static"
                             value={100}
+                            //calculate size of circle
                             size={window.innerWidth*0.7 > 400 ? 400 : window.innerWidth*0.7}
                             color={"secondary"}
                         />
                         <CircularProgress
                             className={classes.progress}
                             variant="static"
+                            //calculate percentage of correct responses
                             value={(this.props.totalCorrect/this.props.questions.length)*100}
+                            //calculate size of circle
                             size={window.innerWidth*0.7 > 400 ? 400 : window.innerWidth*0.7}
                         />
                         <div className={classes.circleContent}>
                             <div>
                                 <Typography variant="h2" color="primary">
+                                    {/*percentage*/}
                                     { ((this.props.totalCorrect/this.props.questions.length)*100).toFixed(1) }%
                                 </Typography>
                                 <Typography variant="h4" color="secondary">
+                                    {/*no. of correct response out of total*/}
                                     { this.props.totalCorrect } / { this.props.questions.length }
                                 </Typography>
                             </div>
@@ -94,6 +104,7 @@ class Result extends React.Component {
                     </div>
                     <div className={classes.questionsContainer}>
                         <Divider/>
+                        {/*create questions with answer*/}
                         {
                             this.props.questions.map((question, index) => {
                                 return <QuestionAnswer index={index} key={"questionAnswer"+index} question={question}/>
@@ -104,11 +115,13 @@ class Result extends React.Component {
                         <div>
                             <Grid container>
                                 <Grid className={classes.btnContainer} item xs={6} md={2} lg={1}>
+                                    {/*button to navigate to the home page*/}
                                     <Button onClick={() => { this.props.reset(); this.props.history.push(""); } } fullWidth variant="contained" color="primary" className={classes.button}>
                                         Home
                                     </Button>
                                 </Grid>
                                 <Grid className={classes.btnContainer} item xs={6} md={2} lg={1}>
+                                    {/*button to restart the quiz*/}
                                     <Button onClick={() => { this.props.reset(); this.props.history.push("quiz"); } } fullWidth variant="contained" color="primary" className={classes.button}>
                                         Retry
                                     </Button>
@@ -131,15 +144,15 @@ class Result extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        questions: state.quiz.questions,
-        totalCorrect: state.quiz.totalCorrect
+        questions: state.quiz.questions, //all questions
+        totalCorrect: state.quiz.totalCorrect //total number of correct questions
     };
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
         reset: () => {
-            dispatch(reset())
+            dispatch(reset()) //reset all the attempts and start from beginning
         }
     };
 };

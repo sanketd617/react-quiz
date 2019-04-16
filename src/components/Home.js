@@ -10,6 +10,7 @@ import Link from "@material-ui/core/Link";
 import {withRouter} from "react-router-dom";
 
 
+//classes for styling
 const styles = theme => createStyles({
     root: {
         padding: theme.spacing.unit*5,
@@ -69,29 +70,40 @@ const Home = props => {
     const {classes} = props;
     return (
         <Grid container className={classes.root}>
+            {/*hide on medium & smaller screens*/}
             <Hidden mdDown>
                 <Grid item lg={3}>
                 </Grid>
             </Hidden>
+
+            {/*main content   */}
             <Grid item xs={12} lg={6} className={classes.main}>
+                {/*title*/}
                 <Typography variant="h1" className={classes.heading}>
                     QuizW!z
                 </Typography>
                 <div className={classes.question}>
+
+                    {/*question*/}
                     <Typography variant="h4">
                         Can you answer this simple quiz on ReactJS?
                     </Typography>
                 </div>
                 <div className={classes.buttonContainer}>
+
+                    {/*start quiz button*/}
                     <Button
                         variant="contained"
                         color="primary"
                         className={classes.button}
+                        // when clicked view the quiz page
                         onClick={() => props.history.push("/quiz")}
                     >
                         get started
                     </Button>
                 </div>
+
+                {/*Developer info*/}
                 <div className={classes.devInfo}>
                     <div className={classes.devDiv}>
                         Developed by
@@ -114,6 +126,8 @@ const Home = props => {
                     </div>
                 </div>
             </Grid>
+
+            {/*hide on medium & smaller screens*/}
             <Hidden mdDown>
                 <Grid item lg={3}>
                 </Grid>

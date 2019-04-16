@@ -8,11 +8,12 @@ import Result from "../containers/Result";
 import MuiThemeProvider from "@material-ui/core/styles/MuiThemeProvider";
 import createMuiTheme from "@material-ui/core/styles/createMuiTheme";
 
-
+//create classes if required
 const styles = theme => createStyles({
 
 });
 
+//create a custom theme, make changes to default theme here
 const theme = createMuiTheme({
     palette: {
         secondary: {
@@ -24,12 +25,21 @@ const theme = createMuiTheme({
 const App = (props) => {
     const { classes } = props;
     return (
+        // Wrapper for theme
         <MuiThemeProvider theme={theme}>
             <div>
+                {/*Wrapper for router*/}
                 <BrowserRouter>
+                    {/*Display Home component when / is matched*/}
                     <Route path="/" exact component={Home}/>
+
+
+                    {/*Display Quiz component when /quiz is matched*/}
                     <Route path="/quiz" component={Quiz}/>
+
+                    {/*Display Result component when /result is matched*/}
                     <Route path="/result" component={Result}/>
+
                 </BrowserRouter>
             </div>
         </MuiThemeProvider>

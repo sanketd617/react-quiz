@@ -17,6 +17,7 @@ import {changeQuestion, respond} from "../actions/QuizActions";
 import {withRouter} from "react-router-dom";
 
 
+//classes for styling
 const styles = theme => createStyles({
     main: {
         padding: theme.spacing.unit*3,
@@ -82,8 +83,11 @@ class Quiz extends React.Component {
                     </Grid>
                 </Hidden>
                 <Grid item xs={12} lg={6} className={classes.main}>
+                    {/*card*/}
                     <Card className={classes.card}>
                         <div className={classes.header}>
+
+                            {/*create question indicators*/}
                             {
                                 this.props.questions.map((question, index) => {
                                     return <Avatar key={index} className={classes.avatar+" "+(this.props.currentQuestion === index? classes.activeAvatar : "")}>
@@ -93,6 +97,7 @@ class Quiz extends React.Component {
                             }
                         </div>
                         <CardContent className={classes.cardContent}>
+                            {/*create question component*/}
                             {
                                 this.props.questions.map((question, index) => {
                                     return (
@@ -101,22 +106,29 @@ class Quiz extends React.Component {
                                 })
                             }
                         </CardContent>
+
+                        {/*action buttons (prev & next question trigger)*/}
                         <CardActions className={classes.actions}>
                             <IconButton
                                 className={classes.btn}
+                                // disable when 1st question is the current question
                                 disabled={this.props.currentQuestion === 0}
+                                //switch to prev question
                                 onClick={() => this.props.currentQuestion > 0 ? this.props.changeQuestion(this.props.currentQuestion-1) : null }
                             >
                                 <ChevronLeftIcon />
                             </IconButton>
                             <IconButton
                                 className={classes.btn}
+                                // disable when no response is given
                                 disabled={this.props.questions[this.props.currentQuestion].response == null}
                                 onClick={() => {
                                     if(this.props.currentQuestion < this.props.questions.length - 1){
+                                        //switch to next question
                                         this.props.changeQuestion(this.props.currentQuestion+1);
                                     }
                                     else{
+                                        //display result if all questions are attempted
                                         this.props.history.push("/result")
                                     }
                                 }}
@@ -137,18 +149,18 @@ class Quiz extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        questions: state.quiz.questions,
-        currentQuestion: state.quiz.currentQuestion
+        questions: state.quiz.questions, // all questions
+        currentQuestion: state.quiz.currentQuestion // current question number
     };
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
         respond: (qn, response) => {
-            dispatch(respond({ qn, response }))
+            dispatch(respond({ qn, response })) //handle response
         },
         changeQuestion: qn => {
-            dispatch(changeQuestion(qn));
+            dispatch(changeQuestion(qn)); //navigate to next or previous question
         }
     };
 };

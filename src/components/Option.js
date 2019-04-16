@@ -4,6 +4,7 @@ import createStyles from "@material-ui/core/styles/createStyles";
 import TouchRipple from '@material-ui/core/ButtonBase';
 import Zoom from "@material-ui/core/Zoom";
 
+//classes for styling
 const styles = theme => createStyles({
     option: {
         padding: theme.spacing.unit,
@@ -49,34 +50,43 @@ const styles = theme => createStyles({
     }
 });
 
+//option key
 const keys = ["A", "B", "C", "D"];
 
 const Option = props => {
     const {classes} = props;
     return (
+
+        // Wrapper for waves effect
         <TouchRipple className={classes.option+" "+(props.active ? classes.activeOption : "")} onClick={() => props.onResponse(props.qn, props.index)}>
             <div className={classes.main}>
+
+                {/*Zoom in/out animation wrapper for selected option*/}
                 <Zoom
                     in={props.active}
                     timeout={300}
                     style={{transitionDelay: !props.active ? 0 : 300}}
                     unmountOnExit
                 >
+                    {/*Option*/}
                     <div className={classes.key+" "+classes.activeKey}>
                         { keys[props.index] }
                     </div>
                 </Zoom>
+                {/*Zoom in/out animation wrapper for unselected option*/}
                 <Zoom
                     in={!props.active}
                     timeout={300}
                     style={{transitionDelay: props.active ? 0 : 300}}
                     unmountOnExit
                 >
+                    {/*Option*/}
                     <div className={classes.key}>
                         { keys[props.index] }
                     </div>
                 </Zoom>
                 <div className={classes.value}>
+                    {/*Option value*/}
                     { props.option }
                 </div>
             </div>

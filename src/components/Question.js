@@ -4,6 +4,8 @@ import createStyles from "@material-ui/core/styles/createStyles";
 import Typography from "@material-ui/core/Typography";
 import Option from "./Option";
 
+
+//classes for styling
 const styles = theme => createStyles({
     question: {
         textAlign: 'center',
@@ -34,11 +36,12 @@ const Question = props => {
 
     return (
         <div className={classes.question} style={{transform: `translateY(${-props.qn*100}%) translateX(${(props.qn-props.cqn+((props.qn-props.cqn) > 0 ? 0.1 : (props.qn-props.cqn) < 0 ? -0.1 : 0))*100}%)`}}>
-
+            {/*Main question*/}
             <Typography variant="h5" className={classes.text}>
                 { props.question.que }
             </Typography>
 
+            {/*Creating options*/}
             {
                 props.question.options.map((option, index) => {
                     return <Option

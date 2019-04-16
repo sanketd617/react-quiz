@@ -5,7 +5,9 @@ import {Provider} from "react-redux";
 import store from "./Store";
 
 ReactDOM.render(
+    // redux provider
     <Provider store={store}>
         <App />
-    </Provider>
-    , document.getElementById("root"));
+    </Provider>,
+    //bootstrap via the element with id "root
+    document.getElementById("root"));
