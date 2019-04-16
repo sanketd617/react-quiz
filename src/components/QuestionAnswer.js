@@ -30,22 +30,22 @@ const QuestionAnswer = props => {
                     { props.index+1 }.
                 </Grid>
 
-                <Grid xs={11}>
+                <Grid item xs={11}>
                     <Grid item xs={12}>
                         { props.question.que }
                     </Grid>
                     <Grid container className={classes.withPadding}>
-                        <Grid xs={1}>
+                        <Grid item xs={1}>
                             <Icon fontSize="small" className={props.question.ans === props.question.response ? classes.correctIcon : classes.wrongIcon }>
                                 {props.question.ans === props.question.response ? "done" : "close" }
                             </Icon>
                         </Grid>
-                        <Grid xs={11}>
+                        <Grid item xs={11}>
                             { props.question.options[props.question.response] }
                         </Grid>
                         {
                             props.question.ans !== props.question.response ?
-                                <Fragment className={classes.withPadding}>
+                                <div className={classes.withPadding}>
                                     <Grid item xs={1}>
                                         <Icon fontSize="small" className={classes.correctIcon}>
                                             done
@@ -54,7 +54,7 @@ const QuestionAnswer = props => {
                                     <Grid item xs={11}>
                                         { props.question.options[props.question.ans] }
                                     </Grid>
-                                </Fragment> : ""
+                                </div> : ""
                         }
                     </Grid>
                 </Grid>

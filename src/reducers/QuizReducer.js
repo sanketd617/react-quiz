@@ -6,7 +6,7 @@ const questions = [{
 }, {
     que: "State whether true of false. \'JSX is typesafe\'",
     options: ["True", "False"],
-    ans: 1,
+    ans: 0,
     response: null
 }, {
     que: "React merges the object you provide into the current state using ________",
@@ -21,7 +21,7 @@ const questions = [{
 }, {
     que: "_________ can be done while more than one element needs to be returned from a component",
     options: ["Abstraction", "Packing", "Insulation", "Wrapping"],
-    ans: 1,
+    ans: 3,
     response: null
 }, {
     que: "Which of the following needs to be updated to achieve dynamic UI updates?",

@@ -71,6 +71,7 @@ class Quiz extends React.Component {
 
     render() {
         const {classes} = this.props;
+
         return (
             <Grid container>
                 <Grid item xs={12}>
@@ -111,7 +112,14 @@ class Quiz extends React.Component {
                             <IconButton
                                 className={classes.btn}
                                 disabled={this.props.questions[this.props.currentQuestion].response == null}
-                                onClick={() => this.props.currentQuestion < this.props.questions.length - 1? this.props.changeQuestion(this.props.currentQuestion+1) : this.props.history.push("./result")}
+                                onClick={() => {
+                                    if(this.props.currentQuestion < this.props.questions.length - 1){
+                                        this.props.changeQuestion(this.props.currentQuestion+1);
+                                    }
+                                    else{
+                                        this.props.history.push("/result")
+                                    }
+                                }}
                             >
                                 <ChevronRightIcon />
                             </IconButton>
