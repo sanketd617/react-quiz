@@ -12,3 +12,10 @@ export function changeQuestion(payload) {
     }
 }
 
+export function reset() {
+    return {
+        type: "RESET",
+        payload: null
+    }
+}
+

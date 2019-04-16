@@ -4,7 +4,7 @@ const questions = [{
     ans: 0,
     response: null
 }, {
-    que: "State whether true of false. <b> JSX is typesafe</b>",
+    que: "State whether true of false. \'JSX is typesafe\'",
     options: ["True", "False"],
     ans: 1,
     response: null
@@ -37,7 +37,8 @@ const questions = [{
 
 const defaultState = {
     questions: questions,
-    currentQuestion: 0
+    currentQuestion: 0,
+    totalCorrect: 0
 };
 
 
@@ -52,8 +53,8 @@ const QuizReducer = (state = defaultState, action) => {
 
             state = {
                 ...state,
-                questions: questions
-
+                questions: questions,
+                totalCorrect: state.totalCorrect + (questions[action.payload.qn].ans === action.payload.response ? 1 : 0)
             };
 
             break;
@@ -61,6 +62,11 @@ const QuizReducer = (state = defaultState, action) => {
             state = {
                 ...state,
                 currentQuestion: action.payload
+            };
+            break;
+        case "RESET":
+            state = {
+                ...defaultState
             };
             break;
         default:

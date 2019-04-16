@@ -14,6 +14,7 @@ import IconButton from "@material-ui/core/IconButton";
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import {changeQuestion, respond} from "../actions/QuizActions";
+import {withRouter} from "react-router-dom";
 
 
 const styles = theme => createStyles({
@@ -46,7 +47,7 @@ const styles = theme => createStyles({
         transform: 'scale(1)',
         color: theme.palette.primary.main
     },
-    backBtn: {
+    btn: {
         backgroundColor: theme.palette.primary.main,
         color: "white",
         '&:hover': {
@@ -57,9 +58,6 @@ const styles = theme => createStyles({
             backgroundColor: "lightgrey",
             color: "grey"
         }
-    },
-    nextBtn: {
-        color: theme.palette.primary.main
     },
     cardContent: {
         height: window.innerHeight*0.7,
@@ -97,25 +95,25 @@ class Quiz extends React.Component {
                             {
                                 this.props.questions.map((question, index) => {
                                     return (
-                                        <Question cqn={this.props.currentQuestion} qn={index} question={question} onResponse={this.props.respond}/>
+                                        <Question key={"question"+index} cqn={this.props.currentQuestion} qn={index} question={question} onResponse={this.props.respond}/>
                                     )
                                 })
                             }
                         </CardContent>
                         <CardActions className={classes.actions}>
                             <IconButton
-                                className={classes.backBtn}
+                                className={classes.btn}
                                 disabled={this.props.currentQuestion === 0}
                                 onClick={() => this.props.currentQuestion > 0 ? this.props.changeQuestion(this.props.currentQuestion-1) : null }
                             >
                                 <ChevronLeftIcon />
                             </IconButton>
                             <IconButton
-                                className={classes.nextBtn}
+                                className={classes.btn}
                                 disabled={this.props.questions[this.props.currentQuestion].response == null}
-                                onClick={() => this.props.currentQuestion < this.props.questions.length - 1? this.props.changeQuestion(this.props.currentQuestion+1) : console.log("submit")}
+                                onClick={() => this.props.currentQuestion < this.props.questions.length - 1? this.props.changeQuestion(this.props.currentQuestion+1) : this.props.history.push("./result")}
                             >
-                                <small><small>Next</small></small> <ChevronRightIcon />
+                                <ChevronRightIcon />
                             </IconButton>
                         </CardActions>
                     </Card>
@@ -147,4 +145,4 @@ const mapDispatchToProps = (dispatch) => {
     };
 };
 
-export default withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(Quiz));
+export default withRouter(withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(Quiz)));
