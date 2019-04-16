@@ -2,6 +2,7 @@ import React from "react";
 import withStyles from "@material-ui/core/styles/withStyles";
 import createStyles from "@material-ui/core/styles/createStyles";
 import TouchRipple from '@material-ui/core/ButtonBase';
+import Zoom from "@material-ui/core/Zoom";
 
 const styles = theme => createStyles({
     option: {
@@ -18,11 +19,15 @@ const styles = theme => createStyles({
             width: `calc(100% - ${theme.spacing.unit*2}px)`,
         }
     },
+    activeOption: {
+        background: theme.palette.primary.light
+    },
     main: {
         display: 'flex',
         alignItems: 'center'
     },
     key: {
+        position: 'absolute',
         padding: `${theme.spacing.unit}px ${theme.spacing.unit*1.7}px`,
         border: `2px solid ${theme.palette.primary.main}`,
         borderRadius: '50%',
@@ -30,8 +35,17 @@ const styles = theme => createStyles({
             padding: `${theme.spacing.unit}px ${theme.spacing.unit*1.3}px`,
         }
     },
+    activeKey: {
+        backgroundColor: theme.palette.primary.main,
+        color: "white"
+    },
     value: {
-        paddingLeft: theme.spacing.unit
+        padding: `${theme.spacing.unit}px ${theme.spacing.unit*1.7}px`,
+        paddingLeft: theme.spacing.unit*7,
+        [theme.breakpoints.down('sm')]: {
+            padding: `${theme.spacing.unit}px ${theme.spacing.unit*1.3}px`,
+            paddingLeft: theme.spacing.unit*5,
+        }
     }
 });
 
@@ -40,11 +54,28 @@ const keys = ["A", "B", "C", "D"];
 const Option = props => {
     const {classes} = props;
     return (
-        <TouchRipple className={classes.option}>
+        <TouchRipple className={classes.option+" "+(props.active ? classes.activeOption : "")} onClick={() => props.onResponse(props.qn, props.index)}>
             <div className={classes.main}>
-                <div className={classes.key}>
-                    { keys[props.index] }
-                </div>
+                <Zoom
+                    in={props.active}
+                    timeout={300}
+                    style={{transitionDelay: !props.active ? 0 : 300}}
+                    unmountOnExit
+                >
+                    <div className={classes.key+" "+classes.activeKey}>
+                        { keys[props.index] }
+                    </div>
+                </Zoom>
+                <Zoom
+                    in={!props.active}
+                    timeout={300}
+                    style={{transitionDelay: props.active ? 0 : 300}}
+                    unmountOnExit
+                >
+                    <div className={classes.key}>
+                        { keys[props.index] }
+                    </div>
+                </Zoom>
                 <div className={classes.value}>
                     { props.option }
                 </div>

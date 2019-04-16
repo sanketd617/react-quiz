@@ -44,7 +44,7 @@ const defaultState = {
 const QuizReducer = (state = defaultState, action) => {
     switch (action.type) {
         case "RESPONSE_GIVEN":
-            let questions = state.questions;
+            let questions = [...state.questions];
             questions[action.payload.qn] = {
                 ...state.questions[action.payload.qn],
                 response: action.payload.response
@@ -55,6 +55,7 @@ const QuizReducer = (state = defaultState, action) => {
                 questions: questions
 
             };
+
             break;
         case "QUESTION_CHANGED":
             state = {

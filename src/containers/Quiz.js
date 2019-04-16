@@ -8,14 +8,13 @@ import {connect} from "react-redux";
 import Question from "../components/Question";
 import Card from "@material-ui/core/Card";
 import Avatar from "@material-ui/core/Avatar";
-import CardMedia from "@material-ui/core/CardMedia";
 import CardContent from "@material-ui/core/CardContent";
-import Typography from "@material-ui/core/Typography";
 import CardActions from "@material-ui/core/CardActions";
 import IconButton from "@material-ui/core/IconButton";
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import {changeQuestion, respond} from "../actions/QuizActions";
+
 
 const styles = theme => createStyles({
     main: {
@@ -36,12 +35,15 @@ const styles = theme => createStyles({
     },
     avatar: {
         margin: `0 ${theme.spacing.unit}px`,
+        transitionDuration: 300,
+        transform: 'scale(0.8)',
         [theme.breakpoints.down('sm')]: {
             margin: `0 ${theme.spacing.unit/3}px`
         }
     },
     activeAvatar: {
         backgroundColor: "white",
+        transform: 'scale(1)',
         color: theme.palette.primary.main
     },
     backBtn: {
@@ -58,6 +60,12 @@ const styles = theme => createStyles({
     },
     nextBtn: {
         color: theme.palette.primary.main
+    },
+    cardContent: {
+        height: window.innerHeight*0.7,
+        [theme.breakpoints.down('sm')]: {
+            height: window.innerHeight*0.7,
+        }
     }
 });
 
@@ -85,16 +93,21 @@ class Quiz extends React.Component {
                                 })
                             }
                         </div>
-                        <CardMedia
-                            className={classes.media}
-                            image="/static/images/cards/paella.jpg"
-                            title="Paella dish"
-                        />
-                        <CardContent>
-                            <Question question={this.props.questions[0]} onResponse={this.props.respond}/>
+                        <CardContent className={classes.cardContent}>
+                            {
+                                this.props.questions.map((question, index) => {
+                                    return (
+                                        <Question cqn={this.props.currentQuestion} qn={index} question={question} onResponse={this.props.respond}/>
+                                    )
+                                })
+                            }
                         </CardContent>
-                        <CardActions className={classes.actions} disableActionSpacing>
-                            <IconButton className={classes.backBtn} disabled={this.props.currentQuestion === 0}>
+                        <CardActions className={classes.actions}>
+                            <IconButton
+                                className={classes.backBtn}
+                                disabled={this.props.currentQuestion === 0}
+                                onClick={() => this.props.currentQuestion > 0 ? this.props.changeQuestion(this.props.currentQuestion-1) : null }
+                            >
                                 <ChevronLeftIcon />
                             </IconButton>
                             <IconButton
