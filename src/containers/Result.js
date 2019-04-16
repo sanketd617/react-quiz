@@ -78,7 +78,7 @@ class Result extends React.Component {
                         <CircularProgress
                             className={classes.progress}
                             variant="static"
-                            value={90}
+                            value={(this.props.totalCorrect/this.props.questions.length)*100}
                             size={window.innerWidth*0.7 > 400 ? 400 : window.innerWidth*0.7}
                         />
                         <div className={classes.circleContent}>
