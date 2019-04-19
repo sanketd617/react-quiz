@@ -1,7 +1,7 @@
 self.__precacheManifest = [
   {
-    "revision": "11c9c89fb223d956ab7e",
-    "url": "/react-quiz/static/js/main.58fbcf76.chunk.js"
+    "revision": "f5ae8f78d709c88ffbdb",
+    "url": "/react-quiz/static/js/main.c0a053d9.chunk.js"
   },
   {
     "revision": "260e1d56f90ee7d17fb2",
@@ -12,7 +12,7 @@ self.__precacheManifest = [
     "url": "/react-quiz/static/js/2.6bff8d87.chunk.js"
   },
   {
-    "revision": "6eee112f87eb1f7abdb740e58bd391cc",
+    "revision": "9c43bb4071c26fac1efd82212f2a27b3",
     "url": "/react-quiz/index.html"
   }
 ];
