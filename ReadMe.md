@@ -12,8 +12,8 @@ Start the server: `npm run start`
 That's it!
 
 
-**Remote link (AWS)** <br>
-http://3.89.93.88
+**Live Demo** <br>
+https://sanketd617.github.io/react-quiz/
 
 # Code explained
 

@@ -29,7 +29,7 @@ const App = (props) => {
         <MuiThemeProvider theme={theme}>
             <div>
                 {/*Wrapper for router*/}
-                <BrowserRouter>
+                <BrowserRouter basename='react-quiz'>
                     {/*Display Home component when / is matched*/}
                     <Route path="/" exact component={Home}/>
 
